@@ -5,13 +5,20 @@ import { getAdmin } from '../services/register.admin.service';
 import { insertHours } from '../services/register.hours.service';
 
 const RegisterHours: React.FC = () => {
+    // State to store the list of admins
     const [admins, setAdmins] = useState<any[]>([]);
+    // State to store the selected admin
     const [selectedAdmin, setSelectedAdmin] = useState('');
+    // State to store the selected date
     const [date, setDate] = useState('');
+    // State to store the entry hour
     const [hourEntry, setHourEntry] = useState('');
+    // State to store the exit hour
     const [hourExit, setHourExit] = useState('');
+    // State to control modal visibility
     const [showModal, setShowModal] = useState(false);
 
+    // Function to load the admins from the API
     const loadAdmins = async () => {
         try {
             const data = await getAdmin();
@@ -21,10 +28,12 @@ const RegisterHours: React.FC = () => {
         }
     };
 
+    // useEffect to load admins when the component mounts
     useEffect(() => {
         loadAdmins();
     }, []);
 
+    // Function to reset form fields
     const resetForm = () => {
         setSelectedAdmin('');
         setDate('');
@@ -32,7 +41,7 @@ const RegisterHours: React.FC = () => {
         setHourExit('');
     };
 
-    // Manejar la lógica de guardado
+    // Handle the save action and validate fields
     const handleSave = async () => {
         if ((!selectedAdmin || !date || !hourEntry || !hourExit)) {
             showAlert('Todos los campos son obligatorios', 'error');
@@ -111,8 +120,7 @@ const RegisterHours: React.FC = () => {
                 </div>
             </Form>
 
-
-            {/* Modal de Confirmación */}
+            {/* Confirmation Modal */}
             <Modal show={showModal} onHide={() => setShowModal(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>Confirmar Registro</Modal.Title>

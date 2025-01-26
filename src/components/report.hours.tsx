@@ -6,12 +6,18 @@ import { showAlert } from '../utils/functions';
 import { format } from 'date-fns';
 
 const ReportHours: React.FC = () => {
+    // State to store the reports data
     const [reports, setReports] = useState<any[]>([]);
+    // State to store the list of admins
     const [admins, setAdmins] = useState<any[]>([]);
+    // State to store the selected admin's ID
     const [selectedAdmin, setSelectedAdmin] = useState('');
+    // State to store the start date for the report
     const [dateFrom, setDateFrom] = useState('');
+    // State to store the end date for the report
     const [dateTo, setDateTo] = useState('');
 
+    // Function to load admins from the API
     const loadAdmins = async () => {
         try {
             const data = await getAdmin();
@@ -21,45 +27,51 @@ const ReportHours: React.FC = () => {
         }
     };
 
+    // useEffect hook to load admins when the component mounts
     useEffect(() => {
         loadAdmins();
     }, []);
 
+    // Function to fetch the report data based on selected admin and date range
     const fetchReports = async (adminId?: string, from?: string, to?: string) => {
         try {
             const data = await getHoursReport(Number(adminId), from, to);
             setReports(data);
         } catch (err: any) {
-            setReports([]);
+            setReports([]); // In case of error, clear reports data
         }
     };
 
+    // useEffect hook to fetch reports when the component mounts
     useEffect(() => {
         fetchReports();
     }, []);
 
+    // Handle form submission to generate the report
     const handleGenerateReport = (e: React.FormEvent) => {
         e.preventDefault();
         fetchReports(selectedAdmin, dateFrom, dateTo);
     };
 
+    // Function to format hours worked into a readable format
     const formatHoursWorked = (hoursWorked: any) => {
         if (hoursWorked) {
             if (hoursWorked.hasOwnProperty('hours') && hoursWorked.hasOwnProperty('minutes')) {
-                // Convertir a un formato legible: "X horas Y minutos"
+                // Convert to readable format: "X hours Y minutes"
                 return `${hoursWorked.hours} horas ${hoursWorked.minutes} minutos`;
             } else if (hoursWorked.hasOwnProperty('hours')) {
-                // Si solo tiene 'hours', simplemente mostrar esas horas
+                // If only hours are available, return hours
                 return `${hoursWorked.hours} horas`;
             }
         }
-        return 'N/A';
+        return 'N/A'; // Default return if no data
     };
 
     return (
         <div className="App">
             <h3 className="mt-3">Reportes de Entrada y Salida</h3>
 
+            {/* Form to select admin and date range */}
             <Form onSubmit={handleGenerateReport} className="mt-4">
                 <div className="col-md-4">
                     <Form.Group controlId="userId">
@@ -78,6 +90,7 @@ const ReportHours: React.FC = () => {
                         </Form.Control>
                     </Form.Group>
 
+                    {/* Date range selection */}
                     <Form.Group controlId="dateFrom" className="mt-3">
                         <Form.Label>Fecha Desde</Form.Label>
                         <Form.Control
@@ -96,12 +109,14 @@ const ReportHours: React.FC = () => {
                         />
                     </Form.Group>
 
+                    {/* Button to generate the report */}
                     <Button variant="primary" type="submit" className="mt-3">
                         Generar Reporte
                     </Button>
                 </div>
             </Form>
 
+            {/* Displaying the report table if reports are available */}
             {reports.length > 0 ? (
                 <Table striped bordered hover className="mt-3">
                     <thead>
@@ -128,7 +143,7 @@ const ReportHours: React.FC = () => {
                     </tbody>
                 </Table>
             ) : (
-                <p className="mt-3">No hay registros disponibles.</p>
+                <p className="mt-3">No hay registros disponibles.</p> // Message if no reports are found
             )}
         </div>
     );
