@@ -13,17 +13,8 @@ RUN npm install
 # Copia el resto del código fuente
 COPY . .
 
-# Construye la aplicación
-RUN npm run build
-
-# Usa una imagen ligera de Nginx para servir la aplicación
-FROM nginx:alpine
-
-# Copia los archivos estáticos generados al directorio de Nginx
-COPY --from=build /usr/src/app/build /usr/share/nginx/html
-
-# Exponer el puerto 3000 para servir la aplicación
+# Exponer el puerto en el que React corre
 EXPOSE 3000
 
-# Arranca Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Ejecutar en modo de desarrollo (npm start)
+CMD ["npm", "start"]
