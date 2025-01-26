@@ -1,36 +1,47 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Proyecto Frontend - React y TypeScript
 
-## Available Scripts
+Este es un proyecto de frontend desarrollado con React y TypeScript, diseñado para interactuar con la API del sistema de recursos humanos. Permite a los usuarios visualizar y gestionar los datos relacionados con los funcionarios y sus horas trabajadas. La aplicación incluye un panel para visualizar reportes y gestionar la entrada/salida de los empleados.
 
-In the project directory, you can run:
+## Requisitos
 
-### `npm start`
+- Node.js >= 16.x
+- npm >= 8.x
+- TypeScript >= 4.x
+- React >= 18.x
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Instalación
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Sigue estos pasos para instalar y configurar el proyecto localmente:
 
-### `npm test`
+1. Clona el repositorio:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   ```bash
+   git clone <URL_DEL_REPOSITORIO>
+   ```
 
-### `npm run build`
+2. Navega a la carpeta del proyecto:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   ```bash
+   cd <NOMBRE_DEL_PROYECTO>
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Instala las dependencias:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   ```bash
+   npm install
+   ```
 
-## Learn More
+## Desarrollo
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Para iniciar la aplicación en modo de desarrollo, puedes usar el siguiente comando. Esto ejecutará el proyecto con `react-scripts` y recargará automáticamente los cambios en el código:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm start
+```
+
+Esto iniciará la aplicación en el navegador en el puerto `3000`.
+
+### Scripts disponibles
+
+- `start`: Inicia la aplicación en modo desarrollo.
