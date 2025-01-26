@@ -134,7 +134,7 @@ const ReportHours: React.FC = () => {
                             <tr key={index}>
                                 <td>{report.nombres}</td>
                                 <td>{report.apellidos}</td>
-                                <td>{format(new Date(report.fecha), 'dd/MM/yyyy')}</td>
+                                <td>{new Date(report.fecha).toISOString().split('T')[0].split('-').reverse().join('/')}</td>
                                 <td>{report.hora_entrada}</td>
                                 <td>{report.hora_salida}</td>
                                 <td>{formatHoursWorked(report.horas_trabajadas)}</td>
