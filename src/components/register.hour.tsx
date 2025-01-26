@@ -24,7 +24,7 @@ const RegisterHours: React.FC = () => {
             const data = await getAdmin();
             setAdmins(data);
         } catch (err) {
-            showAlert('Error al cargar los funcionarios.', 'error');
+            console.log('Error al cargar los funcionarios.', 'error');
         }
     };
 

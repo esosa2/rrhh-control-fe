@@ -19,7 +19,7 @@ const RegisterAdmin: React.FC = () => {
             const data = await getAdmin();
             setAdmins(data); // Update state with fetched data
         } catch (err: any) {
-            showAlert('Error al cargar los administradores.', 'error'); // Show error if loading fails
+            console.log('Error al cargar los administradores.'); // Show error if loading fails
         }
     };
 
